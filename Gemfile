@@ -29,6 +29,7 @@ gem 'toastr-rails'
 
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
+gem 'omniauth-facebook'
 
 
 # Use ActiveModel has_secure_password
