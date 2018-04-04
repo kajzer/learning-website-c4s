@@ -25,6 +25,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'materialize-sass'
 gem 'devise', '~> 3.4.1'
+gem 'toastr-rails'
 
 
 # Use ActiveModel has_secure_password
