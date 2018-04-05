@@ -8,7 +8,7 @@ module ApplicationHelper
         else
             image_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
         end
-        image_tag(image_url, alt: user.name, class: "gravatar circle responsive_img")
+        image_tag(image_url, alt: user.name, class: "gravatar circle responsive_img avatar-small")
     end
     
     class CodeRayify < Redcarpet::Render::HTML
