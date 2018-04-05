@@ -15,13 +15,13 @@
     <li class="divider"></li>
     <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
   </ul>
-    <nav class="brown lighten-4 z-depth-2">
+    <nav class="light-blue darken-1 z-depth-2">
       <div class="container">
         <div class="nav-wrapper">
           <a href="#!" class="brand-logo">Code4startup</a>
           <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
           <ul class="right hide-on-med-and-down">
-            <li><a href="#">Courses</a></li>
+            <li><%= link_to "Courses", root_path %></li>
             <% if(!user_signed_in?)%>
               <li><%= link_to "Sign Up", new_user_registration_path %></li>
               <li><%= link_to "Log In", new_user_session_path %></li>
@@ -34,7 +34,7 @@
             <% end %>
           </ul>
           <ul class="side-nav" id="mobile-demo">
-            <li><a href="#">Courses</a></li>
+            <li><%= link_to "Courses", root_path %></li>
             <% if(!user_signed_in?)%>
               <li><%= link_to "Sign Up", new_user_registration_path %></li>
               <li><%= link_to "Log In", new_user_session_path %></li>

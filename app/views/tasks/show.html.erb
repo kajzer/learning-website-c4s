@@ -22,8 +22,32 @@
     <div class="col m8">
         <div class="card z-depth-2">
             <div class="card-content">
-                <%= @task.video %>
+                <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
+                    <div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
+                        <div class="wistia_embed wistia_async_<%= @task.video %> videoFoam=true" style="height:100%;width:100%">&nbsp;</div>
+                    </div>
+                </div>
             </div>
+            
+            <div class="row">
+                <div class="col m6">
+                    <% if !@prev_task.nil? %>
+                        <%= link_to "Prev", [@prev_task.project, @prev_task], class: "btn btn-primary" %>
+                    <% else %>
+                        &nbsp;
+                    <% end %>
+                </div>
+                <div class="col m6">
+                    <% if !@next_task.nil? %>
+                        <span class="right">
+                            <%= link_to "Next", [@next_task.project, @next_task], class: "btn btn-primary" %>
+                        </span>
+                    <% else %>
+                        &nbsp;
+                    <% end %>                    
+                </div>
+            </div>
+            
             <div class="card-action grey-text text-darken-4">
                 <h5><%= @task.title %></h5>
                 <hr>
@@ -32,3 +56,8 @@
         </div>
     </div>
 </div>
+
+
+
+<script src="https://fast.wistia.com/embed/medias/<%= @task.video %>.jsonp" async></script>
+<script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
