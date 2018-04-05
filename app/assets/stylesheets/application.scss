@@ -15,3 +15,11 @@
   .container {
       width: 95%;
   }
+  
+  
+#toast-container {
+  pointer-events: none;
+  > div {
+    pointer-events: auto;
+  }
+}
