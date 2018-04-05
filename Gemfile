@@ -40,6 +40,8 @@ gem "paperclip", "~> 6.0.0"
 gem 'redcarpet', '~> 3.2.3'
 gem 'coderay', '~> 1.1.0'
 
+gem 'friendly_id', '~> 5.1.0'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
