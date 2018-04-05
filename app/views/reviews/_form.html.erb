@@ -1,5 +1,5 @@
 <%= form_for([@project, @review]) do |f| %>
-    <%= f.text_field :star %>
+    <div id="user_star"></div>
     <%= f.text_field :comment %>
     
     <%= f.hidden_field :project_id, value: @project.id %>
@@ -10,3 +10,11 @@
     </div>
 
 <% end %>
+
+<script>
+    $('#user_star').raty({
+       path: '/assets',
+       scoreName: 'review[star]',
+       score: 1
+    });
+</script>

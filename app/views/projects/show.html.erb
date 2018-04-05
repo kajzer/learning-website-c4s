@@ -51,7 +51,8 @@
             </div>
             <div class="card-content grey-text text-darken-4">
                 <h5><%= @project.name %></h5>
-                <span><%= @project.average_rating %> from <%= pluralize(@reviews.count, 'review') %></span>
+                <span id="avarage_rating"></span>
+                <span> from <%= pluralize(@reviews.count, 'review') %></span>
                 <hr>
                 <%= @project.content %>
                 
@@ -83,3 +84,10 @@
     
 </div>
 
+<script>
+    $('#avarage_rating').raty({
+       path: '/assets',
+       readOnly: true,
+       score: <%= @project.average_rating %>
+    });
+</script>
