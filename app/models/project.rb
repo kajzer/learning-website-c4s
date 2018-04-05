@@ -4,7 +4,7 @@ class Project < ActiveRecord::Base
     friendly_id :name, use: [:slugged, :finders]
     
     has_many :tasks
-    
+    has_many :reviews
     has_many :subscriptions
     has_many :users, through: :subscriptions
     
@@ -17,5 +17,9 @@ class Project < ActiveRecord::Base
     
     def shortname
        name.truncate(25) 
+    end
+    
+    def average_rating
+        reviews.blank? ? 0 : reviews.average(:star).round(2)
     end
 end
