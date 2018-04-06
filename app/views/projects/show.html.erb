@@ -10,10 +10,59 @@
                 <div class="card-action center">
                     
                     <% if user_signed_in? %>
-                        <%= form_tag free_path do %>
-                            <%= hidden_field_tag 'project_id', @project.id %>
-                            <button type="submit" class="btn waves-effect waves-light pink darken-2">Take this Project</button>
+                    
+                        <% if @project.price == 0  %>
+                    
+                            <%= form_tag free_path do %>
+                                <%= hidden_field_tag 'project_id', @project.id %>
+                                <button type="submit" class="btn waves-effect waves-light pink darken-2">Take this Project</button>
+                            <% end %>
+                        <% else %>
+                            <%= form_tag pay_path, id: 'chargeForm' do %>
+                            
+                                <script src="https://checkout.stripe.com/checkout.js"></script>
+                                <%= hidden_field_tag 'stripeToken' %>
+                                <%= hidden_field_tag 'stripeEmail' %>
+                                <%= hidden_field_tag 'project_id', @project.id %>
+                                
+                                <button id="customButton" type="button" class="btn waves-effect waves-light pink darken-2">Take this Project</button><br/>
+                                
+                                <script>
+                                var handler = StripeCheckout.configure({
+                                  key: '<%= Rails.configuration.stripe[:publishable_key] %>',
+                                //   image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+                                  locale: 'auto',
+                                  token: function(token, arg) {
+                                    // You can access the token ID with `token.id`.
+                                    // Get the token ID to your server-side code for use.
+                                    $('#stripeToken').val(token.id);
+                                    $('#stripeEmail').val(token.email);
+                                    $('#chargeForm').submit();
+                                  }
+                                });
+                                
+                                document.getElementById('customButton').addEventListener('click', function(e) {
+                                  // Open Checkout with further options:
+                                  handler.open({
+                                    name: 'Code4startup',
+                                    description: '<%= @project.name %>',
+                                    amount: <%= @project.price_in_cents %>,
+                                    email: '<%= current_user.email %>'
+                                  });
+                                  e.preventDefault();
+                                });
+                                
+                                // Close Checkout on page navigation:
+                                window.addEventListener('popstate', function() {
+                                  handler.close();
+                                });
+                                </script>                        
+                            <% end %>
+                        
                         <% end %>
+                        
+
+
                     <% else %>
                         <%= link_to new_user_session_path do %>
                             <button type="submit" class="btn waves-effect waves-light pink darken-2">Take this Project</button>
